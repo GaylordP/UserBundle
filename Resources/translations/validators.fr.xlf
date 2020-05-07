@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" target-language="fr" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="email.already_taken">
+                <source>email.already_taken</source>
+                <target>Cette adresse e-mail est déjà prise.</target>
+            </trans-unit>
+            <trans-unit id="password.updated_same">
+                <source>password.updated_same</source>
+                <target>Votre ancien et votre nouveau mot de passe sont identiques.</target>
+            </trans-unit>
+            <trans-unit id="user.password.wrong">
+                <source>user.password.wrong</source>
+                <target>Le mot de passe indiqué est invalide.</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

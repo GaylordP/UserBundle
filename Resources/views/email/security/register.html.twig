@@ -1,0 +1,20 @@
+{% extends 'email/template/template.html.twig' %}
+
+{% block content %}
+    <p>
+        Vous venez de vous inscrire sur Bubble.lbgt et nous vous en remercions.
+    </p>
+    <p>
+        Nous espérons que vous y ferez d'agréables sorties et de bonnes rencontres ! :)
+    </p>
+    <p>
+        Mais avant et par mesure de sécurité, merci de bien vouloir valider votre adresse e-mail :
+    </p>
+    <button class="large expand mb-0 success" href="{{ absolute_url(path('register_validation',
+        {
+            'validationToken': user.validationToken,
+        }
+    )) }}">
+        Valider mon adresse e-mail
+    </button>
+{% endblock %}

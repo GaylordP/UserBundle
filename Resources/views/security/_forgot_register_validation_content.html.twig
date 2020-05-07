@@ -1,0 +1,5 @@
+{{ form_new(
+    form,
+    'action.forgot_register_validation_send'|trans({}, 'user'),
+    include('@User/security/_forgot_register_validation_ico.html.twig', with_context = false)
+) }}

@@ -1,0 +1,15 @@
+{% extends 'default/template/template.html.twig' %}
+
+{% block title %}
+    <i class="{{ include('@User/security/_forgot_register_validation_ico.html.twig', with_context = false) }}"></i>
+    {{ 'title.forgot_register_validation'|trans({}, 'user') }}
+{% endblock %}
+
+{% block content %}
+    {{ include('@User/security/_forgot_register_validation_content.html.twig',
+        {
+            'form': form,
+        },
+        with_context = false
+    ) }}
+{% endblock %}

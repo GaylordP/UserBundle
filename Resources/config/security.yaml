@@ -1,0 +1,62 @@
+services:
+    GaylordP\UserBundle\Controller\:
+        resource: '../../Controller'
+        tags: ['controller.service_arguments']
+        autoconfigure: true
+        autowire: true
+
+    GaylordP\UserBundle\EventListener\CreatableListener:
+        autowire: true
+        tags:
+            -
+                name: 'doctrine.event_listener'
+                event: 'prePersist'
+
+    GaylordP\UserBundle\Form\UserNewPasswordType:
+        arguments:
+            - '@security.password_encoder'
+            - '@translator'
+        tags:
+            - 'form.type'
+
+    GaylordP\UserBundle\Handler\LogoutSuccessHandler:
+        arguments:
+            - '@security.helper'
+            - '@router.default'
+
+    GaylordP\UserBundle\Repository\UserForgotPasswordRepository:
+        arguments:
+            - '@doctrine'
+        tags:
+            - 'doctrine.repository_service'
+
+    GaylordP\UserBundle\Repository\UserRepository:
+        arguments:
+            - '@doctrine'
+        tags:
+            - 'doctrine.repository_service'
+
+    GaylordP\UserBundle\Repository\Filter\DeletedAtFilter:
+        arguments:
+            - '@doctrine.orm.entity_manager'
+
+    GaylordP\UserBundle\Security\AppAuthentificator:
+        arguments:
+            - '@doctrine.orm.entity_manager'
+            - '@router.default'
+            - '@security.csrf.token_manager'
+            - '@security.password_encoder'
+            - '@parameter_bag'
+
+    GaylordP\UserBundle\Validator\UserEmailValidator:
+        arguments:
+            - '@GaylordP\UserBundle\Repository\UserRepository'
+        tags:
+            - 'validator.constraint_validator'
+
+    GaylordP\UserBundle\Validator\UserPasswordOldNewSameValidator:
+        arguments:
+            - '@security.helper'
+            - '@security.password_encoder'
+        tags:
+            - 'validator.constraint_validator'

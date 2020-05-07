@@ -1,0 +1,158 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" target-language="fr" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="action.forgot_password">
+                <source>action.forgot_password</source>
+                <target>Mot de passe oublié</target>
+            </trans-unit>
+            <trans-unit id="action.forgot_password_send">
+                <source>action.forgot_password_send</source>
+                <target>Définir un nouveau mot de passe</target>
+            </trans-unit>
+            <trans-unit id="action.forgot_register_validation">
+                <source>action.forgot_register_validation</source>
+                <target>Lien de validation perdu</target>
+            </trans-unit>
+            <trans-unit id="action.forgot_register_validation_send">
+                <source>action.forgot_register_validation_send</source>
+                <target>Recevoir le lien de validation</target>
+            </trans-unit>
+            <trans-unit id="action.login">
+                <source>action.login</source>
+                <target>Se connecter</target>
+            </trans-unit>
+            <trans-unit id="action.register">
+                <source>action.register</source>
+                <target>S'inscrire</target>
+            </trans-unit>
+            <trans-unit id="action.user.information">
+                <source>action.user.information</source>
+                <target>Modifier mes informations</target>
+            </trans-unit>
+            <trans-unit id="action.user.password">
+                <source>action.user.password</source>
+                <target>Modifier mon mot de passe</target>
+            </trans-unit>
+
+            <trans-unit id="email.help_privacy">
+                <source>email.help_privacy</source>
+                <target>Votre adresse e-mail est strictement privée. Nous nous engageons à ne jamais la diffuser.</target>
+            </trans-unit>
+
+            <trans-unit id="label.email">
+                <source>label.email</source>
+                <target>Adresse e-mail</target>
+            </trans-unit>
+            <trans-unit id="label.password">
+                <source>label.password</source>
+                <target>Mot de passe</target>
+            </trans-unit>
+            <trans-unit id="label.password_current">
+                <source>label.password_current</source>
+                <target>Mot de passe actuel</target>
+            </trans-unit>
+            <trans-unit id="label.password_new">
+                <source>label.password_new</source>
+                <target>Nouveau mot de passe</target>
+            </trans-unit>
+            <trans-unit id="label.user.content">
+                <source>label.user.content</source>
+                <target>Présentation</target>
+            </trans-unit>
+            <trans-unit id="label.username">
+                <source>label.username</source>
+                <target>Nom d'utilisateur</target>
+            </trans-unit>
+
+            <trans-unit id="login.logged">
+                <source>login.logged</source>
+                <target>Connexion impossible : vous êtes déjà connecté.</target>
+            </trans-unit>
+            <trans-unit id="login.required">
+                <source>login.required</source>
+                <target>Vous devez être connecté pour accéder à cette page.</target>
+            </trans-unit>
+
+            <trans-unit id="password.help_case">
+                <source>password.help_case</source>
+                <target>Attention aux majuscules et minuscules.</target>
+            </trans-unit>
+
+            <trans-unit id="title.forgot_password">
+                <source>title.forgot_password</source>
+                <target>Mot de passe oublié</target>
+            </trans-unit>
+            <trans-unit id="title.forgot_register_validation">
+                <source>title.forgot_register_validation</source>
+                <target>Lien de validation perdu</target>
+            </trans-unit>
+            <trans-unit id="title.login">
+                <source>title.login</source>
+                <target>Se connecter</target>
+            </trans-unit>
+            <trans-unit id="title.register">
+                <source>title.register</source>
+                <target>S'inscrire</target>
+            </trans-unit>
+            <trans-unit id="title.user.information">
+                <source>title.user.information</source>
+                <target>Mes informations</target>
+            </trans-unit>
+            <trans-unit id="title.user.password">
+                <source>title.user.password</source>
+                <target>Mon mot de passe</target>
+            </trans-unit>
+
+            <trans-unit id="user.email_already_validated">
+                <source>user.email_already_validated</source>
+                <target>Votre adresse e-mail « %email% » a déjà été validée.</target>
+            </trans-unit>
+            <trans-unit id="user.information.updated_successfully">
+                <source>user.information.updated_successfully</source>
+                <target>Vos informations ont été modifiés.</target>
+            </trans-unit>
+            <trans-unit id="user.login_successfully">
+                <source>user.login_successfully</source>
+                <target>Vous êtes désormais connecté en tant que « %username% ».</target>
+            </trans-unit>
+            <trans-unit id="user.logout_successfully">
+                <source>user.logout_successfully</source>
+                <target>Vous êtes désormais déconnecté de « %username% ».</target>
+            </trans-unit>
+            <trans-unit id="user.password.forgot_send">
+                <source>user.password.forgot_send</source>
+                <target>Un lien vous permettant de redéfinir votre mot de passe vous a été envoyé à l'adresse e-mail « %email% ».</target>
+            </trans-unit>
+            <trans-unit id="user.password.new_successfully">
+                <source>user.password.new_successfully</source>
+                <target>Votre mot de passe a été modifié. Vous êtes connecté.</target>
+            </trans-unit>
+            <trans-unit id="user.password.updated_successfully">
+                <source>user.password.updated_successfully</source>
+                <target>Votre mot de passe a été modifié.</target>
+            </trans-unit>
+            <trans-unit id="user.registered_successfully">
+                <source>user.registered_successfully</source>
+                <target><![CDATA[Vous êtes désormais enregistré et connecté en tant que « %username% » !]]></target>
+            </trans-unit>
+            <trans-unit id="user.registered_token">
+                <source>user.registered_token</source>
+                <target>Nous venons de vous envoyer l'e-mail de bienvenue contenant le lien de validation pour l'adresse e-mail « %email% ».</target>
+            </trans-unit>
+            <trans-unit id="user.validation_successfully">
+                <source>user.validation_successfully</source>
+                <target>Votre adresse e-mail « %email% » a été validée ! Vous êtes connecté.</target>
+            </trans-unit>
+
+            <trans-unit id="username.help_privacy">
+                <source>username.help_privacy</source>
+                <target>Votre nom d'utilisateur est connu de tous.</target>
+            </trans-unit>
+            <trans-unit id="username.help_privacy_update">
+                <source>username.help_privacy_update</source>
+                <target>Votre nom d'utilisateur est connu de tous. Contactez-nous pour le modifier.</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

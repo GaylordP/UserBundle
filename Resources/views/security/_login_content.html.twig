@@ -1,0 +1,24 @@
+{% if error %}
+    <div class="alert alert-danger" role="alert">
+        <p class="mb-0">
+            {{ error.messageKey|trans(error.messageData, 'security')|raw }}
+        </p>
+    </div>
+{% endif %}
+{{ form_new(
+    form,
+    'action.login'|trans({}, 'user'),
+    include('@User/security/_login_ico.html.twig', with_context = false)
+) }}
+<p class="mt-3 mb-0">
+    {{ 'action.forgot_register_validation'|trans({}, 'user')|button_link(
+        path('forgot_register_validation'),
+        'secondary',
+        include('@User/security/_forgot_register_validation_ico.html.twig', with_context = false)
+    ) }}
+    {{ 'action.forgot_password'|trans({}, 'user')|button_link(
+        path('forgot_password'),
+        'secondary',
+        include('@User/user/_password_ico.html.twig', with_context = false)
+    ) }}
+</p>

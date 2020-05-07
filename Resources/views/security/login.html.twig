@@ -1,0 +1,15 @@
+{% extends 'default/template/template.html.twig' %}
+
+{% block title %}
+    <i class="{{ include('@User/security/_login_ico.html.twig', with_context = false) }}"></i>
+    {{ 'title.login'|trans({}, 'user') }}
+{% endblock %}
+
+{% block content %}
+    {{ include('@User/security/_login_content.html.twig',
+        {
+            'form': form,
+            'error': error,
+        }, with_context = false)
+    }}
+{% endblock %}

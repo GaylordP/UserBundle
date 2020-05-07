@@ -1,0 +1,14 @@
+{% extends 'default/template/template.html.twig' %}
+
+{% block title %}
+    <i class="{{ include('@User/user/_information_ico.html.twig', with_context = false) }}"></i>
+    {{ 'title.user.information'|trans({}, 'user') }}
+{% endblock %}
+
+{% block content %}
+    {{ include('@User/user/_information_content.html.twig',
+        {
+            'form': form,
+        }, with_context = false
+    ) }}
+{% endblock %}

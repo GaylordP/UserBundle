@@ -1,0 +1,5 @@
+{{ form_new(
+    form,
+    'action.register'|trans({}, 'user'),
+    include('@User/security/_register_ico.html.twig', with_context = false)
+) }}
