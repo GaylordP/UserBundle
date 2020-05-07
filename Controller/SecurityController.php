@@ -38,8 +38,10 @@ class SecurityController extends AbstractController
      *     }
      * )
      */
-    public function login(AuthenticationUtils $authenticationUtils, TranslatorInterface $translator): Response
-    {
+    public function login(
+        AuthenticationUtils $authenticationUtils,
+        TranslatorInterface $translator
+    ): Response {
         if (null !== $this->getUser()) {
             throw $this->createAccessDeniedException(
                 $translator->trans('login.logged', [], 'user')

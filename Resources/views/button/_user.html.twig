@@ -1,0 +1,13 @@
+{{ ('@' ~ user.username)|button_link(
+    path('member_profile',
+        {
+            'slug': user.slug,
+        }
+    ),
+    user.color.slug,
+    null,
+    false,
+    {
+        'class': 'btn-sm',
+    }
+) }}

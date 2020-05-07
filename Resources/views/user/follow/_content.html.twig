@@ -1,0 +1,81 @@
+<div class="card mb-3">
+    <div class="card-header">
+        <h2 class="h6 mb-0">
+            <i class="fas fa-grin-hearts"></i>
+            {{ 'title.user.follow.my_followers'|trans({}, 'user') }}
+            <span class="badge badge-purple">
+                {{ my_followers|length }}
+            </span>
+        </h2>
+    </div>
+    <div class="card-body">
+        {% if my_followers is not empty %}
+            <ul class="user-follow-list">
+                {% apply spaceless %}
+                    {% for follower in my_followers %}
+                        <li>
+                            {{ include('@User/button/_user.html.twig',
+                                {
+                                    'user': follower.createdBy,
+                                }, with_context = false
+                            ) }}
+                        </li>
+                    {% endfor %}
+                {% endapply %}
+            </ul>
+        {% else %}
+            <div class="alert alert-danger mb-0">
+                <p class="mb-0">
+                    {{ 'user.follow.nothing'|trans({}, 'user') }}
+                </p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+<div class="card">
+    <div class="card-header">
+        <h2 class="h6 mb-0">
+            <i class="fas fa-kiss-wink-heart"></i>
+            {{ 'title.user.follow.my_followeds'|trans({}, 'user') }}
+            <span class="badge badge-purple">
+                {{ my_followeds|length }}
+            </span>
+        </h2>
+    </div>
+    <div class="card-body">
+        {% if my_followeds is not empty %}
+            <ul class="user-follow-list">
+                {% apply spaceless %}
+                    {% for followed in my_followeds %}
+                        <li>
+                            {{ include('@User/button/_user.html.twig',
+                                {
+                                    'user': followed.user,
+                                }, with_context = false
+                            ) }}
+                            {{ null|button_link(
+                                path('user_follow',
+                                    {
+                                        'slug': followed.user.slug,
+                                    }
+                                ),
+                                '_delete_',
+                                null,
+                                true,
+                                {
+                                    'class': 'btn-sm',
+                                }
+                            ) }}
+                        </li>
+                    {% endfor %}
+                {% endapply %}
+            </ul>
+        {% else %}
+            <div class="alert alert-danger mb-0">
+                <p class="mb-0">
+                    {{ 'user.follow.nothing'|trans({}, 'user') }}
+                </p>
+            </div>
+        {% endif %}
+    </div>
+</div>

@@ -24,6 +24,17 @@ services:
             - '@security.helper'
             - '@router.default'
 
+    GaylordP\UserBundle\Provider\UserProvider:
+        arguments:
+            - '@security.helper'
+            - '@GaylordP\UserBundle\Repository\UserFollowRepository'
+
+    GaylordP\UserBundle\Repository\UserFollowRepository:
+        arguments:
+            - '@doctrine'
+        tags:
+            - 'doctrine.repository_service'
+
     GaylordP\UserBundle\Repository\UserForgotPasswordRepository:
         arguments:
             - '@doctrine'

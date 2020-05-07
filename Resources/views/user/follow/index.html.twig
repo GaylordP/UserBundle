@@ -1,0 +1,15 @@
+{% extends 'default/template/template.html.twig' %}
+
+{% block title %}
+    <i class="fas fa-users"></i>
+    {{ 'title.user.follow'|trans({}, 'user') }}
+{% endblock %}
+
+{% block content %}
+    {{ include('@User/user/follow/_content.html.twig',
+        {
+            'my_followers': my_followers,
+            'my_followeds': my_followeds,
+        }, with_context = false
+    ) }}
+{% endblock %}

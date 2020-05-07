@@ -2,6 +2,10 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
     <file source-language="en" target-language="fr" datatype="plaintext" original="file.ext">
         <body>
+            <trans-unit id="action.follow">
+                <source>action.follow</source>
+                <target>S'abonner</target>
+            </trans-unit>
             <trans-unit id="action.forgot_password">
                 <source>action.forgot_password</source>
                 <target>Mot de passe oublié</target>
@@ -25,6 +29,10 @@
             <trans-unit id="action.register">
                 <source>action.register</source>
                 <target>S'inscrire</target>
+            </trans-unit>
+            <trans-unit id="action.unfollow">
+                <source>action.unfollow</source>
+                <target>Se désabonner</target>
             </trans-unit>
             <trans-unit id="action.user.information">
                 <source>action.user.information</source>
@@ -95,6 +103,18 @@
                 <source>title.register</source>
                 <target>S'inscrire</target>
             </trans-unit>
+            <trans-unit id="title.user.follow">
+                <source>title.user.follow</source>
+                <target>Mes abonnés / Abonnements</target>
+            </trans-unit>
+            <trans-unit id="title.user.follow.my_followers">
+                <source>title.user.follow.my_followers</source>
+                <target>Mes abonnés</target>
+            </trans-unit>
+            <trans-unit id="title.user.follow.my_followeds">
+                <source>title.user.follow.my_followeds</source>
+                <target>Mes abonnements</target>
+            </trans-unit>
             <trans-unit id="title.user.information">
                 <source>title.user.information</source>
                 <target>Mes informations</target>
@@ -107,6 +127,14 @@
             <trans-unit id="user.email_already_validated">
                 <source>user.email_already_validated</source>
                 <target>Votre adresse e-mail « %email% » a déjà été validée.</target>
+            </trans-unit>
+            <trans-unit id="user.follow.nothing">
+                <source>user.follow.nothing</source>
+                <target>Aucun utilisateur à afficher</target>
+            </trans-unit>
+            <trans-unit id="user.follow_successfully">
+                <source>user.follow_successfully</source>
+                <target><![CDATA[Vous suivez désormais l'utilisateur %link_profile%.]]></target>
             </trans-unit>
             <trans-unit id="user.information.updated_successfully">
                 <source>user.information.updated_successfully</source>
@@ -139,6 +167,10 @@
             <trans-unit id="user.registered_token">
                 <source>user.registered_token</source>
                 <target>Nous venons de vous envoyer l'e-mail de bienvenue contenant le lien de validation pour l'adresse e-mail « %email% ».</target>
+            </trans-unit>
+            <trans-unit id="user.unfollow_successfully">
+                <source>user.unfollow_successfully</source>
+                <target><![CDATA[Vous ne suivez plus l'utilisateur %link_profile%.]]></target>
             </trans-unit>
             <trans-unit id="user.validation_successfully">
                 <source>user.validation_successfully</source>
