@@ -28,20 +28,20 @@ class AppAuthentificator extends AbstractFormLoginAuthenticator
     private $urlGenerator;
     private $csrfTokenManager;
     private $passwordEncoder;
-    private $parameters;
+    private $formLoginDefaultTargetPath;
 
     public function __construct(
         EntityManagerInterface $entityManager,
         UrlGeneratorInterface $urlGenerator,
         CsrfTokenManagerInterface $csrfTokenManager,
         UserPasswordEncoderInterface $passwordEncoder,
-        ParameterBagInterface $parameterBag
+        string $formLoginDefaultTargetPath
     ) {
         $this->entityManager = $entityManager;
         $this->urlGenerator = $urlGenerator;
         $this->csrfTokenManager = $csrfTokenManager;
         $this->passwordEncoder = $passwordEncoder;
-        $this->parameters = $parameterBag;
+        $this->formLoginDefaultTargetPath = $formLoginDefaultTargetPath;
     }
 
     public function supports(Request $request)
@@ -129,7 +129,7 @@ class AppAuthentificator extends AbstractFormLoginAuthenticator
             ]
         );
 
-        return new RedirectResponse($this->urlGenerator->generate($this->parameters->get('form_login_default_target_path')));
+        return new RedirectResponse($this->urlGenerator->generate($this->formLoginDefaultTargetPath));
     }
 
     protected function getLoginUrl()

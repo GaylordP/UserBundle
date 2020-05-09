@@ -57,7 +57,7 @@ services:
             - '@router.default'
             - '@security.csrf.token_manager'
             - '@security.password_encoder'
-            - '@parameter_bag'
+            - '%form_login_default_target_path%'
 
     GaylordP\UserBundle\Validator\UserEmailValidator:
         arguments:
