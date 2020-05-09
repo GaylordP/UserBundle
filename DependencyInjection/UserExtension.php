@@ -15,6 +15,6 @@ class UserExtension extends Extension
             $container,
             new FileLocator(__DIR__.'/../Resources/config')
         );
-        $loader->load('security.yaml');
+        $loader->load('services.yaml');
     }
 }
