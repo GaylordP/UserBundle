@@ -18,7 +18,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  * User
  *
  * @ORM\MappedSuperclass
- * @ORM\Table("app_user")
  * @UniqueEntity(
  *     "email",
  *     message = "email.already_taken",

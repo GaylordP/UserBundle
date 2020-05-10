@@ -82,6 +82,15 @@
                 <target>Vous devez être connecté pour accéder à cette page.</target>
             </trans-unit>
 
+            <trans-unit id="menu.login">
+                <source>menu.login</source>
+                <target>Connexion</target>
+            </trans-unit>
+            <trans-unit id="menu.register">
+                <source>menu.register</source>
+                <target>Inscription</target>
+            </trans-unit>
+
             <trans-unit id="password.help_case">
                 <source>password.help_case</source>
                 <target>Attention aux majuscules et minuscules.</target>
