@@ -1,0 +1,10 @@
+{% if app.user and null == app.user.validatedAt and date(app.user.createdAt) < date('-10minutes') and 'forgot_register_validation' != app.request.get('_route') %}
+    <div class="alert alert-danger">
+        <p class="m-0">
+            {{ 'user.email_validated_null'|trans({
+                '%email%': app.user.email,
+                '%link%': path('forgot_register_validation'),
+            }, 'user')|raw }}
+        </p>
+    </div>
+{% endif %}

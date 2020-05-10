@@ -137,6 +137,10 @@
                 <source>user.email_already_validated</source>
                 <target>Votre adresse e-mail « %email% » a déjà été validée.</target>
             </trans-unit>
+            <trans-unit id="user.email_validated_null">
+                <source>user.email_validated_null</source>
+                <target><![CDATA[Votre adresse e-mail « %email% » n'a pas encore été validée. Merci d'utiliser le lien présent dans l'email de bienvenue : <a href="%link%">lien de validation perdu</a>.]]></target>
+            </trans-unit>
             <trans-unit id="user.follow.nothing">
                 <source>user.follow.nothing</source>
                 <target>Aucun utilisateur à afficher</target>

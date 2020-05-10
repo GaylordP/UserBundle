@@ -1,29 +1,31 @@
-{% if false == user.__isUserFollowed %}
-    {{ 'action.follow'|trans({}, 'user')|button_link(
-        path('user_follow',
+{% if app.user != user %}
+    {% if false == user.__isUserFollowed %}
+        {{ 'action.follow'|trans({}, 'user')|button_link(
+            path('user_follow',
+                {
+                    'slug': user.slug,
+                }
+            ),
+            'red',
+            'fas fa-user-plus',
+            false,
             {
-                'slug': user.slug,
+                'class': 'btn-sm',
             }
-        ),
-        'secondary',
-        'fas fa-user-plus',
-        false,
-        {
-            'class': 'btn-sm',
-        }
-    ) }}
-{% else %}
-    {{ 'action.unfollow'|trans({}, 'user')|button_link(
-        path('user_follow',
+        ) }}
+    {% else %}
+        {{ 'action.unfollow'|trans({}, 'user')|button_link(
+            path('user_follow',
+                {
+                    'slug': user.slug,
+                }
+            ),
+            'secondary',
+            'fas fa-user-times',
+            false,
             {
-                'slug': user.slug,
+                'class': 'btn-sm',
             }
-        ),
-        'red',
-        'fas fa-user-times',
-        false,
-        {
-            'class': 'btn-sm',
-        }
-    ) }}
+        ) }}
+    {% endif %}
 {% endif %}

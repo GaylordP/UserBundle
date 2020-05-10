@@ -1,0 +1,13 @@
+div.control-container {
+    background-color: $gray-100;
+    display: flex;
+    align-items: center;
+    border-top: 1px solid $gray-400;
+    border-bottom: 1px solid $gray-400;
+    margin: 1rem -1rem;
+    padding: .5rem;
+}
+
+div.control-container > *:not(:first-child) {
+    margin-left: .5rem;
+}

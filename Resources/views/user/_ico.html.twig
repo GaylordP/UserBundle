@@ -1,0 +1,33 @@
+{% apply spaceless %}
+        {% if size in [
+            'message',
+            'navbar',
+        ] %}
+            {% set image_size = '15' %}
+            {% set online_size = '10' %}
+        {% elseif size in [
+            'forum-speaker',
+            'message-index',
+            'title',
+        ] %}
+            {% set image_size = '25' %}
+            {% set online_size = '12_5' %}
+        {% elseif size in [
+            'forum-post',
+        ] %}
+            {% set image_size = '65' %}
+            {% set online_size = '1' %}
+        {% elseif size in [
+            'card',
+        ] %}
+            {% set image_size = '85' %}
+            {% set online_size = '22_5' %}
+        {% endif %}
+        {% if null != user.userMedia %}
+            {#
+            <img src="{{ asset(mediaImage(user.userMedia.media.uuid, user.userMedia.media.name, image_size, image_size, 'square')) }}" alt="{{ user.username }} - {{ 'label.user.media.profile'|trans }}" class="user-media-profile border-{{ user.color.slug }}">
+            #}
+        {% else %}
+            <i class="fas fa-user-circle {% if 'card' == size %}swatch{% else %}text{% endif %}-{{ user.color.slug }} fa-user-circle-px-{{ image_size }}"></i>
+        {% endif %}
+{% endapply %}

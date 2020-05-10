@@ -354,7 +354,7 @@ class SecurityController extends AbstractController
     /**
      * @Route(
      *     {
-     *         "fr": "/mot-de-passe-oublie/{token}",
+     *         "fr": "/mot-de-passe-oublie/{_token}",
      *     },
      *     name="forgot_password_token",
      *     methods=
