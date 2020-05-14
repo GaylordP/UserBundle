@@ -106,6 +106,10 @@
                 <source>menu.user.logout</source>
                 <target>Déconnexion</target>
             </trans-unit>
+            <trans-unit id="menu.user.password">
+                <source>menu.user.password</source>
+                <target>Mon mon de passe</target>
+            </trans-unit>
             <trans-unit id="menu.user.profile">
                 <source>menu.user.profile</source>
                 <target>Mon profil</target>
