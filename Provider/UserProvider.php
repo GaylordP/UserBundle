@@ -10,14 +10,14 @@ class UserProvider
 {
     const IS_USER_FOLLOWED = '__isUserFollowed';
 
-    private $user;
+    private $security;
     private $userFollowRepository;
 
     public function __construct(
         Security $security,
         UserFollowRepository $userFollowRepository
     ) {
-        $this->user = $security->getUser();
+        $this->security = $security;
         $this->userFollowRepository = $userFollowRepository;
     }
 
@@ -40,9 +40,9 @@ class UserProvider
         }
 
         if (!empty($ids)) {
-            if (true === $isUserFollowed && null !== $this->user) {
+            if (true === $isUserFollowed && null !== $this->security->getUser()) {
                 $followeds = $this->userFollowRepository->findBy([
-                    'createdBy' => $this->user,
+                    'createdBy' => $this->security->getUser(),
                     'user' => $ids,
                 ]);
 
