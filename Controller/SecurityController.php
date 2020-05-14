@@ -365,7 +365,7 @@ class SecurityController extends AbstractController
      *         "POST",
      *     }
      * )
-     * @Entity("forgot", expr="repository.findOneBy({ token: token, validatedAt: null })")
+     * @Entity("forgot", expr="repository.findOneBy({ token: _token, validatedAt: null })")
      */
     public function forgotPasswordToken(
         Request $request,
