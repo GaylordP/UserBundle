@@ -94,6 +94,22 @@
                 <source>menu.register</source>
                 <target>Inscription</target>
             </trans-unit>
+            <trans-unit id="menu.user.follow">
+                <source>menu.user.follow</source>
+                <target>Mes abonnés / Abonnements</target>
+            </trans-unit>
+            <trans-unit id="menu.user.information">
+                <source>menu.user.information</source>
+                <target>Mes informations</target>
+            </trans-unit>
+            <trans-unit id="menu.user.logout">
+                <source>menu.user.logout</source>
+                <target>Déconnexion</target>
+            </trans-unit>
+            <trans-unit id="menu.user.profile">
+                <source>menu.user.profile</source>
+                <target>Mon profil</target>
+            </trans-unit>
 
             <trans-unit id="password.help_case">
                 <source>password.help_case</source>
