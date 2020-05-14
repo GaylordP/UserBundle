@@ -10,7 +10,9 @@
             'fas fa-user-plus',
             false,
             {
+                'id': 'user-follow-' ~ user.slug,
                 'class': 'btn-sm',
+                'data-front-common-ajax': 'true',
             }
         ) }}
     {% else %}
@@ -24,7 +26,9 @@
             'fas fa-user-times',
             false,
             {
+                'id': 'user-follow-' ~ user.slug,
                 'class': 'btn-sm',
+                'data-front-common-ajax': 'true',
             }
         ) }}
     {% endif %}

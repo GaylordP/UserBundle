@@ -8,16 +8,22 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Http\Logout\LogoutSuccessHandlerInterface;
+use Twig\Environment;
 
 class LogoutSuccessHandler implements LogoutSuccessHandlerInterface
 {
     private $security;
     private $urlGenerator;
+    private $twig;
 
-    public function __construct(Security $security, UrlGeneratorInterface $urlGenerator)
-    {
+    public function __construct(
+        Security $security,
+        UrlGeneratorInterface $urlGenerator,
+        Environment $twig
+    ) {
         $this->security = $security;
         $this->urlGenerator = $urlGenerator;
+        $this->twig = $twig;
     }
 
     public function onLogoutSuccess(Request $request): Response
@@ -28,7 +34,9 @@ class LogoutSuccessHandler implements LogoutSuccessHandlerInterface
                 [
                     'user.logout_successfully',
                     [
-                        '%username%' => $this->security->getUser()->getUsername(),
+                        '%username%' => $this->twig->render('@User/button/_user.html.twig', [
+                            'user' => $this->security->getUser(),
+                        ]),
                     ],
                     'user'
                 ]

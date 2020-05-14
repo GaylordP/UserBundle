@@ -4,8 +4,10 @@ namespace GaylordP\UserBundle\Controller;
 
 use App\Entity\User;
 use GaylordP\UserBundle\Entity\UserFollow;
+use GaylordP\UserBundle\Provider\UserProvider;
 use GaylordP\UserBundle\Repository\UserFollowRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -55,7 +57,8 @@ class UserFollowController extends AbstractController
     public function follow(
         Request $request,
         RouterInterface $router,
-        User $member
+        User $member,
+        UserProvider $userProvider
     ): Response {
         if ($this->getUser() === $member) {
             throw $this->createNotFoundException();
@@ -74,19 +77,20 @@ class UserFollowController extends AbstractController
 
             $entityManager->flush();
 
-            $this->get('session')->getFlashBag()->add(
-                'success',
-                [
-                    'user.unfollow_successfully',
+            if (!$request->isXmlHttpRequest()) {
+                $this->get('session')->getFlashBag()->add(
+                    'success',
                     [
-                        '%link_profile%' => $this->renderView('@User/button/_user.html.twig', [
-                            'user' => $member,
-                        ]),
-                        '%username%' => '<span class="btn btn-sm btn-' . $member->getColor()->getSlug() . '">@' . $member->getUsername() .'</span>',
-                    ],
-                    'user'
-                ]
-            );
+                        'user.unfollow_successfully',
+                        [
+                            '%link_profile%' => $this->renderView('@User/button/_user.html.twig', [
+                                'user' => $member,
+                            ]),
+                        ],
+                        'user'
+                    ]
+                );
+            }
         } else {
             $userFollow = new UserFollow();
             $userFollow->setUser($member);
@@ -94,30 +98,44 @@ class UserFollowController extends AbstractController
             $entityManager->persist($userFollow);
             $entityManager->flush();
 
-            $this->get('session')->getFlashBag()->add(
-                'success',
-                [
-                    'user.follow_successfully',
+            if (!$request->isXmlHttpRequest()) {
+                $this->get('session')->getFlashBag()->add(
+                    'success',
                     [
-                        '%link_profile%' => $this->renderView('@User/button/_user.html.twig', [
-                            'user' => $member,
-                        ]),
-                    ],
-                    'user'
-                ]
-            );
+                        'user.follow_successfully',
+                        [
+                            '%link_profile%' => $this->renderView('@User/button/_user.html.twig', [
+                                'user' => $member,
+                            ]),
+                        ],
+                        'user'
+                    ]
+                );
+            }
         }
 
-        if (
-            null !== $request->headers->get('referer')
-                &&
-            'login' !== $router->match(parse_url($request->headers->get('referer'))['path'])['_route']
-        ) {
-            return $this->redirect($request->headers->get('referer'));
+        if ($request->isXmlHttpRequest()) {
+            $userProvider->addExtraInfos($member, true);
+
+            return new JsonResponse([
+                'action' => 'replace',
+                'target' => '#user-follow-' . $member->getSlug(),
+                'html' => $this->renderView('@User/button/_follow.html.twig', [
+                    'user' => $member,
+                ])
+            ], Response::HTTP_PARTIAL_CONTENT);
         } else {
-            return $this->redirectToRoute('member_profile', [
-                'slug' => $member->getSlug(),
-            ]);
+            if (
+                null !== $request->headers->get('referer')
+                &&
+                'login' !== $router->match(parse_url($request->headers->get('referer'))['path'])['_route']
+            ) {
+                return $this->redirect($request->headers->get('referer'));
+            } else {
+                return $this->redirectToRoute('member_profile', [
+                    'slug' => $member->getSlug(),
+                ]);
+            }
         }
     }
 }

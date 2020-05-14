@@ -17,7 +17,8 @@
                             {{ include('@User/button/_user.html.twig',
                                 {
                                     'user': follower.createdBy,
-                                }, with_context = false
+                                },
+                                with_context = false
                             ) }}
                         </li>
                     {% endfor %}
@@ -51,7 +52,8 @@
                             {{ include('@User/button/_user.html.twig',
                                 {
                                     'user': followed.user,
-                                }, with_context = false
+                                },
+                                with_context = false
                             ) }}
                             {{ null|button_link(
                                 path('user_follow',

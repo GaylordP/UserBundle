@@ -134,7 +134,9 @@ class SecurityController extends AbstractController
                 [
                     'user.registered_successfully',
                     [
-                        '%username%' => $user->getUsername(),
+                        '%username%' => $this->renderView('@User/button/_user.html.twig', [
+                            'user' => $user,
+                        ]),
                     ],
                     'user'
                 ]

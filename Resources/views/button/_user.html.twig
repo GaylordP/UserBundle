@@ -1,13 +1,26 @@
-{{ ('@' ~ user.username)|button_link(
-    path('member_profile',
+{% if remove_link is not defined %}
+    {{ ('@' ~ user.username)|button_link(
+        path('member_profile',
+            {
+                'slug': user.slug,
+            }
+        ),
+        user.color.slug,
+        null,
+        false,
         {
-            'slug': user.slug,
+            'class': 'btn-sm',
+            'data-toggle': 'tooltip',
+            'title': 'label.show_profile'|trans({}, 'user')
         }
-    ),
-    user.color.slug,
-    null,
-    false,
-    {
-        'class': 'btn-sm',
-    }
-) }}
+    ) }}
+{% else %}
+    {{ ('@' ~ user.username)|label(
+        user.color.slug,
+        null,
+        false,
+        {
+            'class': 'label-sm',
+        }
+    ) }}
+{% endif %}

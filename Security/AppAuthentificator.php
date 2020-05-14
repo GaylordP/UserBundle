@@ -18,6 +18,7 @@ use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticator;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
+use Twig\Environment;
 
 class AppAuthentificator extends AbstractFormLoginAuthenticator
 {
@@ -28,19 +29,22 @@ class AppAuthentificator extends AbstractFormLoginAuthenticator
     private $csrfTokenManager;
     private $passwordEncoder;
     private $formLoginDefaultTargetPath;
+    private $twig;
 
     public function __construct(
         EntityManagerInterface $entityManager,
         UrlGeneratorInterface $urlGenerator,
         CsrfTokenManagerInterface $csrfTokenManager,
         UserPasswordEncoderInterface $passwordEncoder,
-        string $formLoginDefaultTargetPath
+        string $formLoginDefaultTargetPath,
+        Environment $twig
     ) {
         $this->entityManager = $entityManager;
         $this->urlGenerator = $urlGenerator;
         $this->csrfTokenManager = $csrfTokenManager;
         $this->passwordEncoder = $passwordEncoder;
         $this->formLoginDefaultTargetPath = $formLoginDefaultTargetPath;
+        $this->twig = $twig;
     }
 
     public function supports(Request $request)
@@ -122,7 +126,9 @@ class AppAuthentificator extends AbstractFormLoginAuthenticator
             [
                 'user.login_successfully',
                 [
-                    '%username%' => $token->getUser()->getUsername(),
+                    '%username%' => $this->twig->render('@User/button/_user.html.twig', [
+                        'user' => $token->getUser(),
+                    ]),
                 ],
                 'user'
             ]

@@ -64,6 +64,10 @@
                 <source>label.password_new</source>
                 <target>Nouveau mot de passe</target>
             </trans-unit>
+            <trans-unit id="label.show_profile">
+                <source>label.show_profile</source>
+                <target>Afficher le profil</target>
+            </trans-unit>
             <trans-unit id="label.user.content">
                 <source>label.user.content</source>
                 <target>Présentation</target>
@@ -155,11 +159,11 @@
             </trans-unit>
             <trans-unit id="user.login_successfully">
                 <source>user.login_successfully</source>
-                <target>Vous êtes désormais connecté en tant que « %username% ».</target>
+                <target>Vous êtes désormais connecté en tant que %username%.</target>
             </trans-unit>
             <trans-unit id="user.logout_successfully">
                 <source>user.logout_successfully</source>
-                <target>Vous êtes désormais déconnecté de « %username% ».</target>
+                <target>Vous êtes désormais déconnecté de %username%.</target>
             </trans-unit>
             <trans-unit id="user.password.forgot_send">
                 <source>user.password.forgot_send</source>
@@ -175,7 +179,7 @@
             </trans-unit>
             <trans-unit id="user.registered_successfully">
                 <source>user.registered_successfully</source>
-                <target><![CDATA[Vous êtes désormais enregistré et connecté en tant que « %username% » !]]></target>
+                <target><![CDATA[Vous êtes désormais enregistré et connecté en tant que %username% !]]></target>
             </trans-unit>
             <trans-unit id="user.registered_token">
                 <source>user.registered_token</source>
