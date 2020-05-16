@@ -4,11 +4,14 @@ namespace GaylordP\UserBundle\Security;
 
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
 use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 use Symfony\Component\Security\Core\Security;
@@ -18,9 +21,10 @@ use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticator;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Environment;
 
-class AppAuthentificator extends AbstractFormLoginAuthenticator
+class Authentificator extends AbstractFormLoginAuthenticator
 {
     use TargetPathTrait;
 
@@ -30,6 +34,7 @@ class AppAuthentificator extends AbstractFormLoginAuthenticator
     private $passwordEncoder;
     private $formLoginDefaultTargetPath;
     private $twig;
+    private $translator;
 
     public function __construct(
         EntityManagerInterface $entityManager,
@@ -37,7 +42,8 @@ class AppAuthentificator extends AbstractFormLoginAuthenticator
         CsrfTokenManagerInterface $csrfTokenManager,
         UserPasswordEncoderInterface $passwordEncoder,
         string $formLoginDefaultTargetPath,
-        Environment $twig
+        Environment $twig,
+        TranslatorInterface $translator
     ) {
         $this->entityManager = $entityManager;
         $this->urlGenerator = $urlGenerator;
@@ -45,6 +51,7 @@ class AppAuthentificator extends AbstractFormLoginAuthenticator
         $this->passwordEncoder = $passwordEncoder;
         $this->formLoginDefaultTargetPath = $formLoginDefaultTargetPath;
         $this->twig = $twig;
+        $this->translator = $translator;
     }
 
     public function supports(Request $request)
@@ -135,6 +142,19 @@ class AppAuthentificator extends AbstractFormLoginAuthenticator
         );
 
         return new RedirectResponse($this->urlGenerator->generate($this->formLoginDefaultTargetPath));
+    }
+
+    public function start(Request $request, AuthenticationException $authException = null)
+    {
+        if($request->isXmlHttpRequest()) {
+            return new JsonResponse([
+                'action' => 'show-modal',
+                'title' => $this->translator->trans('Error', [], 'validators'),
+                'body' => $this->translator->trans('login.required', [], 'user'),
+            ], Response::HTTP_PARTIAL_CONTENT);
+        }
+
+        return parent::start($request, $authException);
     }
 
     protected function getLoginUrl()
