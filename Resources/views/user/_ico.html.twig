@@ -9,7 +9,12 @@
             {% set online_size = '22_5' %}
         {% endif %}
         {% if null != user.userMedia %}
-            <img src="{{ asset(media_resize(user.userMedia.media, size, size, 'square')) }}" alt="{{ user.username }} - {{ 'label.user.media.profile'|trans }}" class="user-media-profile border-{{ user.color.slug }}">
+            <img src="{{ asset(media_resize(user.userMedia.media, size, size, 'square')) }}" alt="{{ 'label.user.media.profile'|trans(
+                {
+                    '%username%': user.username,
+                },
+                'user'
+            ) }}" class="user-media-profile border-{{ user.color.slug }}">
         {% else %}
             <i class="fas fa-user-circle text-{{ user.color.slug }} fa-user-circle-px-{{ size }}" style="font-size: {{ size }}px"></i>
         {% endif %}

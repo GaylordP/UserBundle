@@ -72,6 +72,10 @@
                 <source>label.user.content</source>
                 <target>Présentation</target>
             </trans-unit>
+            <trans-unit id="label.user.media.profile">
+                <source>label.user.media.profile</source>
+                <target>Photo de profil de @%username%</target>
+            </trans-unit>
             <trans-unit id="label.username">
                 <source>label.username</source>
                 <target>Nom d'utilisateur</target>
