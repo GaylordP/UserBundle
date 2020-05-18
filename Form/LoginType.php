@@ -3,6 +3,7 @@
 namespace GaylordP\UserBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -21,6 +22,13 @@ class LoginType extends AbstractType
                 'label' => 'label.password',
                 'ico' => 'fas fa-key',
                 'help' => 'password.help_case',
+            ])
+            ->add('remember_me', CheckboxType::class, [
+                'label' => 'label.remember_me',
+                'label_attr' => [
+                    'class' => 'checkbox-custom',
+                ],
+                'required' => false,
             ])
         ;
     }

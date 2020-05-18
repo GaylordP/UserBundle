@@ -64,6 +64,10 @@
                 <source>label.password_new</source>
                 <target>Nouveau mot de passe</target>
             </trans-unit>
+            <trans-unit id="label.remember_me">
+                <source>label.remember_me</source>
+                <target>Se souvenir de moi</target>
+            </trans-unit>
             <trans-unit id="label.show_profile">
                 <source>label.show_profile</source>
                 <target>Afficher le profil</target>

@@ -157,6 +157,11 @@ class Authentificator extends AbstractFormLoginAuthenticator
         return parent::start($request, $authException);
     }
 
+    public function supportsRememberMe()
+    {
+        return true;
+    }
+
     protected function getLoginUrl()
     {
         return $this->urlGenerator->generate('login');
