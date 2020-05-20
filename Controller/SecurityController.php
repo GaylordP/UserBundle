@@ -91,7 +91,7 @@ class SecurityController extends AbstractController
     ): Response {
         if (null !== $this->getUser()) {
             throw $this->createAccessDeniedException(
-                $translator->trans('login.logged', [], 'user')
+                $translator->trans('register.logged', [], 'user')
             );
         }
 

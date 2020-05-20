@@ -128,6 +128,11 @@
                 <target>Attention aux majuscules et minuscules.</target>
             </trans-unit>
 
+            <trans-unit id="register.logged">
+                <source>register.logged</source>
+                <target>Inscription impossible : vous êtes déjà connecté.</target>
+            </trans-unit>
+
             <trans-unit id="title.forgot_password">
                 <source>title.forgot_password</source>
                 <target>Mot de passe oublié</target>
