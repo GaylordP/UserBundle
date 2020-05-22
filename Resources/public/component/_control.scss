@@ -8,6 +8,6 @@ div.control-container {
     padding: .5rem;
 }
 
-div.control-container > *:not(:first-child) {
+div.control-container > div > *:not(:first-child) {
     margin-left: .5rem;
 }
