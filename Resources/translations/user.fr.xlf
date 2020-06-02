@@ -91,7 +91,7 @@
             </trans-unit>
             <trans-unit id="login.required">
                 <source>login.required</source>
-                <target>Vous devez être connecté pour accéder à cette page.</target>
+                <target>Vous devez être connecté pour accéder à cette fonctionnaté.</target>
             </trans-unit>
 
             <trans-unit id="menu.login">
