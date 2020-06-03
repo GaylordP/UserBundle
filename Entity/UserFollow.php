@@ -31,7 +31,7 @@ class UserFollow
      *
      * @ORM\ManyToOne(
      *     targetEntity="App\Entity\User",
-     *     cascade={"persist"}
+     *     fetch="EAGER"
      * )
      */
     private $user;
@@ -47,7 +47,10 @@ class UserFollow
     /**
      * @var User
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     * @ORM\ManyToOne(
+     *     targetEntity="App\Entity\User",
+     *     fetch="EAGER"
+     * )
      * @CreatedBy
      */
     private $createdBy;

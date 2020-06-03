@@ -75,7 +75,6 @@ class User implements UserInterface, \Serializable
      *
      * @ORM\OneToOne(
      *     targetEntity="App\Entity\UserMedia",
-     *     cascade={"persist"},
      *     fetch="EAGER"
      * )
      */
