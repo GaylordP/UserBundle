@@ -115,7 +115,7 @@ class UserFollowController extends AbstractController
         }
 
         if ($request->isXmlHttpRequest()) {
-            $userProvider->addExtraInfos($member, true);
+            $userProvider->addExtraInfos($member);
 
             return new JsonResponse([
                 'action' => 'replace',
