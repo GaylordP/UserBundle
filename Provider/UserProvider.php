@@ -10,8 +10,8 @@ class UserProvider
 {
     const IS_USER_FOLLOWED = '__isUserFollowed';
 
-    private $security;
-    private $userFollowRepository;
+    protected $security;
+    protected $userFollowRepository;
 
     public function __construct(
         Security $security,
