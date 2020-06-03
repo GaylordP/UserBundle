@@ -119,7 +119,7 @@ class UserFollowController extends AbstractController
 
             return new JsonResponse([
                 'action' => 'replace',
-                'target' => '#user-follow-' . $member->getSlug(),
+                'target' => '.user-follow-' . $member->getSlug(),
                 'html' => $this->renderView('@User/button/_follow.html.twig', [
                     'user' => $member,
                 ])
