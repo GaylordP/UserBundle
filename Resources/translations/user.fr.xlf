@@ -170,8 +170,8 @@
                 <target>Mon mot de passe</target>
             </trans-unit>
 
-            <trans-unit id="user.content">
-                <source>user.content</source>
+            <trans-unit id="user.content.empty">
+                <source>user.content.empty</source>
                 <target><![CDATA[Votre présentation est vide. <a href="%link%">Compléter ma présentation</a>.]]></target>
             </trans-unit>
             <trans-unit id="user.email_already_validated">
