@@ -12,6 +12,7 @@ use GaylordP\UserBundle\Entity\Traits\Deletable;
 use GaylordP\UserBundle\Entity\Traits\Validable;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -43,6 +44,7 @@ class User implements UserInterface, \Serializable
      *
      * @ORM\Column(type="string")
      * @Assert\NotBlank()
+     * @Groups({"user_read_min"})
      */
     protected $username;
 
@@ -88,6 +90,7 @@ class User implements UserInterface, \Serializable
      *     fetch="EAGER"
      * )
      * @Assert\NotBlank()
+     * @Groups({"user_read_min"})
      */
     protected $color;
 
@@ -117,6 +120,7 @@ class User implements UserInterface, \Serializable
      *
      * @ORM\Column(type="string", unique=true)
      * @Sluggable("username")
+     * @Groups({"user_read_min"})
      */
     protected $slug;
 

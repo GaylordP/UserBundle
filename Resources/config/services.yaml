@@ -12,6 +12,13 @@ services:
                 name: 'doctrine.event_listener'
                 event: 'prePersist'
 
+    GaylordP\UserBundle\EventListener\ResponseListener:
+        arguments:
+            - '@security.helper'
+            - '@GaylordP\UserBundle\Mercure\UserCookieGenerator'
+        tags:
+            - { name: kernel.event_listener, event: kernel.response }
+
     GaylordP\UserBundle\Form\UserNewPasswordType:
         arguments:
             - '@security.password_encoder'
@@ -24,6 +31,21 @@ services:
             - '@security.helper'
             - '@router.default'
             - '@twig'
+
+    GaylordP\UserBundle\Mercure\UserCookieGenerator:
+        arguments:
+            - '%env(MERCURE_JWT_KEY)%'
+            - '%kernel.environment%'
+
+    GaylordP\UserBundle\Mercure\JwtProvider:
+        arguments:
+            - '%env(MERCURE_JWT_KEY)%'
+
+    GaylordP\UserBundle\NotificationFormat\NotificationFormat:
+
+    GaylordP\UserBundle\NotificationFormat\UserNotificationFormat:
+        tags:
+            - 'user.notification_format'
 
     GaylordP\UserBundle\Provider\UserProvider:
         arguments:

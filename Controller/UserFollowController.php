@@ -10,6 +10,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mercure\PublisherInterface;
+use Symfony\Component\Mercure\Update;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -58,7 +60,8 @@ class UserFollowController extends AbstractController
         Request $request,
         RouterInterface $router,
         User $member,
-        UserProvider $userProvider
+        UserProvider $userProvider,
+        PublisherInterface $publisher
     ): Response {
         if ($this->getUser() === $member) {
             throw $this->createNotFoundException();
@@ -97,6 +100,19 @@ class UserFollowController extends AbstractController
 
             $entityManager->persist($userFollow);
             $entityManager->flush();
+
+            $update = new Update(
+                'https://bubble.lgbt/user/' . $member->getId(),
+                json_encode([
+                    'topic' => '/user/follow/new',
+                    'value' => [
+                        'id' => 1,
+                    ],
+                    'html' => 'coucou',
+                ]),
+                true
+            );
+            $publisher($update);
 
             if (!$request->isXmlHttpRequest()) {
                 $this->get('session')->getFlashBag()->add(

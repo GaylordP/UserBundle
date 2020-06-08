@@ -1,0 +1,13 @@
+{% if app.user %}
+    <li class="nav-item dropdown{% if app.request.get('_route') in [
+        'user_notification',
+        'user_notification_paginated',
+    ] %} active{% endif %}">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownUser" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="{{ include('@User/notification/_ico.html.twig', with_context = false) }}"></i>
+            <span class="badge badge-success">
+                0
+            </span>
+        </a>
+    </li>
+{% endif %}
