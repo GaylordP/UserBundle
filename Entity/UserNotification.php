@@ -46,11 +46,11 @@ class UserNotification
     private $type;
 
     /**
-     * @var string
+     * @var integer
      *
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="integer", nullable=true)
      */
-    private $parameters;
+    private $elementId;
 
     /**
      * @var \DateTime
@@ -122,23 +122,23 @@ class UserNotification
     }
 
     /**
-     * Get parameters
+     * Get elementId
      *
-     * @return string
+     * @return integer
      */
-    public function getParameters(): ?string
+    public function getElementId(): ?int
     {
-        return $this->parameters;
+        return $this->elementId;
     }
 
     /**
-     * Set parameters
+     * Set elementId
      *
-     * @param string $parameters
+     * @param integer $elementId
      */
-    public function setParameters(?string $parameters)
+    public function setElementId(?int $elementId)
     {
-        $this->parameters = $parameters;
+        $this->elementId = $elementId;
     }
 
     /**

@@ -2,7 +2,7 @@
 
 namespace GaylordP\UserBundle;
 
-use GaylordP\UserBundle\DependencyInjection\Compiler\NotificationFormatPass;
+use GaylordP\UserBundle\DependencyInjection\Compiler\UserNotificationFormatPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
@@ -13,6 +13,6 @@ class UserBundle extends Bundle
         parent::build($container);
 
         $container->addCompilerPass(new UserCompilerPass());
-        $container->addCompilerPass(new NotificationFormatPass());
+        $container->addCompilerPass(new UserNotificationFormatPass());
     }
 }
