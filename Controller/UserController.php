@@ -3,9 +3,11 @@
 namespace GaylordP\UserBundle\Controller;
 
 use App\Form\UserInformationType;
+use GaylordP\UserBundle\Entity\UserNotification;
 use GaylordP\UserBundle\Form\Model\ChangePassword;
 use GaylordP\UserBundle\Form\UserPasswordType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -82,6 +84,8 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $lastPassword = $this->getUser()->getPassword();
+
             $password = $userPasswordEncoder
                 ->encodePassword(
                     $this->getUser(),
@@ -92,6 +96,13 @@ class UserController extends AbstractController
             $this->getUser()->setPassword($password);
 
             $entityManager = $this->getDoctrine()->getManager();
+
+            $userNotification = new UserNotification();
+            $userNotification->setUser($this->getUser());
+            $userNotification->setType('user_password_update');
+            $userNotification->setExtra($lastPassword);
+
+            $entityManager->persist($userNotification);
             $entityManager->flush();
 
             $this->get('session')->getFlashBag()->add(

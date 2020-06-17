@@ -2,12 +2,33 @@
     <li class="nav-item dropdown{% if app.request.get('_route') in [
         'user_notification',
         'user_notification_paginated',
-    ] %} active{% endif %}">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownUser" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    ] %} active{% endif %}" id="navbarDropdownUserNotification" data-user-mercure-url="https://bubble.lgbt/user/{{ app.user.slug }}">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="{{ include('@User/notification/_ico.html.twig', with_context = false) }}"></i>
-            <span class="badge badge-success">
-                0
+            <span class="badge badge-success badge-user-notification-unread">
+                {{ count_user_notification_unread() }}
             </span>
         </a>
+        <div class="dropdown-menu notification-list" aria-labelledby="navbarDropdownUserNotification">
+            {% set notifications = user_notification() %}
+            {% if notifications.results is not empty %}
+                {% for notification in notifications.results %}
+                    {{ include('@User/notification/_notification.html.twig',
+                        {
+                            'notification': notification,
+                            'is_navbar': true,
+                        },
+                        with_context = false
+                    ) }}
+                {% endfor %}
+                <a href="{{ path('user_notification') }}" class="dropdown-item">
+                    {{ 'action.user.notification'|trans({}, 'user') }}
+                </a>
+            {% else %}
+                <span class="dropdown-item">
+                    {{ 'user.notification.not_found'|trans({}, 'user') }}
+                </span>
+            {% endif %}
+        </div>
     </li>
 {% endif %}

@@ -5,6 +5,7 @@ namespace GaylordP\UserBundle\Controller;
 use App\Entity\User;
 use App\Form\RegisterType;
 use GaylordP\UserBundle\Entity\UserForgotPassword;
+use GaylordP\UserBundle\Entity\UserNotification;
 use GaylordP\UserBundle\Form\LoginType;
 use GaylordP\UserBundle\Form\Model\NewPassword;
 use GaylordP\UserBundle\Form\Model\UserEmail;
@@ -114,8 +115,14 @@ class SecurityController extends AbstractController
 
             $user->setPassword($password);
             $user->setValidationToken(uuid_create(UUID_TYPE_RANDOM));
+            $user->setNotificationReadAt(new \DateTime());
+
+            $userNotification = new UserNotification();
+            $userNotification->setUser($user);
+            $userNotification->setType('user_register');
 
             $entityManager->persist($user);
+            $entityManager->persist($userNotification);
             $entityManager->flush();
 
             /*
@@ -237,7 +244,13 @@ class SecurityController extends AbstractController
         $user->setValidatedAt(new \DateTime());
         $user->setValidatedBy($user);
 
+        $userNotification = new UserNotification();
+        $userNotification->setUser($user);
+        $userNotification->setType('user_register_validation');
+        $userNotification->setExtra($user->getEmail());
+
         $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($userNotification);
         $entityManager->flush();
 
         $token = new UsernamePasswordToken($user, null, 'main', $user->getRoles());
@@ -303,11 +316,21 @@ class SecurityController extends AbstractController
                 $forgot = new UserForgotPassword();
                 $forgot->setUser($userEmail->getUser());
                 $forgot->setToken(uuid_create(UUID_TYPE_RANDOM));
-
                 /*
                  * Persist & flush
                  */
                 $entityManager->persist($forgot);
+                $entityManager->flush();
+
+                /*
+                 * Create notification
+                 */
+                $userNotification = new UserNotification();
+                $userNotification->setUser($userEmail->getUser());
+                $userNotification->setType('user_password_forgot');
+                $userNotification->setElementId($forgot->getId());
+
+                $entityManager->persist($userNotification);
                 $entityManager->flush();
 
                 /*
@@ -379,6 +402,8 @@ class SecurityController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $lastPassword = $forgot->getUser()->getPassword();
+
             /*
              * Update database password
              */
@@ -394,6 +419,13 @@ class SecurityController extends AbstractController
             $forgot->setValidatedAt(new \DateTime());
             $forgot->setValidatedBy($forgot->getUser());
 
+            $userNotification = new UserNotification();
+            $userNotification->setUser($this->getUser());
+            $userNotification->setType('user_password_update');
+            $userNotification->setElementId($forgot->getId());
+            $userNotification->setExtra($lastPassword);
+
+            $entityManager->persist($userNotification);
             $entityManager->flush();
 
             /*

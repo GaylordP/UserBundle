@@ -20,12 +20,29 @@ class UserNotificationRepository extends ServiceEntityRepository
         $qb = $this
             ->createQueryBuilder('notification')
             ->andWhere('notification.user = :user')
+            ->setParameter('user', $user)
             ->select('
                 notification
             ')
             ->orderBy('notification.id', 'DESC')
-            ->setParameter('user', $user);
+        ;
 
         return (new Paginator($qb))->paginate($page);
+    }
+
+    public function countUnread(User $user): int
+    {
+        return $this
+            ->createQueryBuilder('notification')
+            ->andWhere('notification.user = :user')
+            ->setParameter('user', $user)
+            ->andWhere('notification.createdAt > :notificationReadAt')
+            ->setParameter('notificationReadAt', $user->getNotificationReadAt())
+            ->select('
+                COUNT(notification.id)
+            ')
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
     }
 }

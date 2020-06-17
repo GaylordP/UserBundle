@@ -1,0 +1,25 @@
+{#
+    Décalage de la hauteur verticale, à revoir
+{{ include('@User/user/_ico.html.twig',
+    {
+        'user': follow.createdBy,
+        'resize': 'square',
+        'size': 15,
+    },
+    with_context = false
+) }}
+#}
+<span>
+    {{ 'user.notification.follow'|trans(
+        {
+            '%username%': include('@User/button/_user.html.twig',
+                {
+                    'remove_link': true,
+                    'user': follow.createdBy,
+                },
+                with_context = false
+            )
+        },
+        'user'
+    )|raw }}
+</span>

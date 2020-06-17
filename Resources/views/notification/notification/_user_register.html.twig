@@ -1,0 +1,14 @@
+<span>
+    {{ 'user.notification.register'|trans(
+        {
+            '%username%': include('@User/button/_user.html.twig',
+                {
+                    'remove_link': true,
+                    'user': notification.user,
+                },
+                with_context = false
+            )
+        },
+        'user'
+    )|raw }}
+</span>

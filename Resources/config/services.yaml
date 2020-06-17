@@ -19,6 +19,24 @@ services:
         tags:
             - { name: kernel.event_listener, event: kernel.response }
 
+    GaylordP\UserBundle\EventListener\UserNotificationListener:
+        arguments:
+            - '@GaylordP\UserBundle\Repository\UserNotificationRepository'
+            - '@GaylordP\UserBundle\UserNotificationFormat\UserNotificationFormat'
+            - '@mercure.hub.default.publisher'
+            - '@twig'
+            - '@security.helper'
+        tags:
+            -
+                name: 'doctrine.event_listener'
+                event: 'postPersist'
+            -
+                name: 'doctrine.event_listener'
+                event: 'onFlush'
+            -
+                name: 'doctrine.event_listener'
+                event: 'postFlush'
+
     GaylordP\UserBundle\Form\UserNewPasswordType:
         arguments:
             - '@security.password_encoder'
@@ -42,6 +60,11 @@ services:
             - '%env(MERCURE_JWT_KEY)%'
 
     GaylordP\UserBundle\UserNotificationFormat\UserNotificationFormat:
+        arguments:
+            - '@translator'
+            - '@twig'
+            - '@router'
+            - '@GaylordP\UserBundle\Repository\UserFollowRepository'
 
     GaylordP\UserBundle\Provider\UserProvider:
         arguments:
@@ -85,6 +108,15 @@ services:
             - '%form_login_default_target_path%'
             - '@twig'
             - '@translator'
+
+    GaylordP\UserBundle\Twig\Extension:
+        arguments:
+            - '@security.helper'
+            - '@twig'
+            - '@GaylordP\UserBundle\UserNotificationFormat\UserNotificationFormat'
+            - '@GaylordP\UserBundle\Repository\UserNotificationRepository'
+        tags:
+            - 'twig.extension'
 
     GaylordP\UserBundle\Validator\UserEmailValidator:
         arguments:

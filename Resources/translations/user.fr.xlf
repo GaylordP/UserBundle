@@ -38,6 +38,10 @@
                 <source>action.user.information</source>
                 <target>Modifier mes informations</target>
             </trans-unit>
+            <trans-unit id="action.user.notification">
+                <source>action.user.notification</source>
+                <target>Voir toutes les notifications</target>
+            </trans-unit>
             <trans-unit id="action.user.password">
                 <source>action.user.password</source>
                 <target>Modifier mon mot de passe</target>
@@ -165,6 +169,14 @@
                 <source>title.user.information</source>
                 <target>Mes informations</target>
             </trans-unit>
+            <trans-unit id="title.user.notification">
+                <source>title.user.notification</source>
+                <target>Mes notifications</target>
+            </trans-unit>
+            <trans-unit id="title.user.notification.pagination">
+                <source>title.user.notification.pagination</source>
+                <target>Pages des notifications</target>
+            </trans-unit>
             <trans-unit id="title.user.password">
                 <source>title.user.password</source>
                 <target>Mon mot de passe</target>
@@ -201,6 +213,30 @@
             <trans-unit id="user.logout_successfully">
                 <source>user.logout_successfully</source>
                 <target>Vous êtes désormais déconnecté de %username%.</target>
+            </trans-unit>
+            <trans-unit id="user.notification.follow">
+                <source>user.notification.follow</source>
+                <target>%username% a commencé à vous suivre.</target>
+            </trans-unit>
+            <trans-unit id="user.notification.not_found">
+                <source>user.notification.not_found</source>
+                <target>Vous n'avez aucune notifications.</target>
+            </trans-unit>
+            <trans-unit id="user.notification.password_forgot">
+                <source>user.notification.password_forgot</source>
+                <target>A votre demande, vous avez reçu par e-mail un lien permettant de redéfinir votre mot de passe.</target>
+            </trans-unit>
+            <trans-unit id="user.notification.password_update">
+                <source>user.notification.password_update</source>
+                <target>Vous avez modifié votre mot de passe.</target>
+            </trans-unit>
+            <trans-unit id="user.notification.register">
+                <source>user.notification.register</source>
+                <target>Vous êtes désormais enregistré en tant que %username%.</target>
+            </trans-unit>
+            <trans-unit id="user.notification.register_validation">
+                <source>user.notification.register_validation</source>
+                <target>Vous avez validé votre adresse e-mail « %email% ».</target>
             </trans-unit>
             <trans-unit id="user.password.forgot_send">
                 <source>user.password.forgot_send</source>

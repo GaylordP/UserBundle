@@ -16,6 +16,21 @@ class UserNotificationController extends AbstractController
      *         "fr": "/user/notification",
      *     },
      *     name="user_notification",
+     *     defaults=
+     *     {
+     *         "page": "1",
+     *     },
+     *     methods="GET"
+     * )
+     * @Route(
+     *     {
+     *         "fr": "/user/notification/{page}",
+     *     },
+     *     requirements=
+     *     {
+     *         "page": "[1-9]\d*",
+     *     },
+     *     name="user_notification_paginated",
      *     methods="GET"
      * )
      */
@@ -29,6 +44,10 @@ class UserNotificationController extends AbstractController
             $page
         );
 
-        dd($notificationFormat->format(iterator_to_array($notifications->getResults())));
+        $notificationFormat->format($notifications->getResults());
+
+        return $this->render('@User/notification/index.html.twig', [
+            'notifications' => $notifications,
+        ]);
     }
 }

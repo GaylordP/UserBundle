@@ -130,6 +130,14 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(type="datetime")
      * @CreatedAt
      */
+    protected $notificationReadAt;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(type="datetime")
+     * @CreatedAt
+     */
     protected $createdAt;
 
     /**
@@ -363,6 +371,26 @@ class User implements UserInterface, \Serializable
     public function setSlug(?string $slug): void
     {
         $this->slug = $slug;
+    }
+
+    /**
+     * Get notificationReadAt
+     *
+     * @return \DateTime
+     */
+    public function getNotificationReadAt(): ?\DateTime
+    {
+        return $this->notificationReadAt;
+    }
+
+    /**
+     * Set notificationReadAt
+     *
+     * @param \DateTime $date
+     */
+    public function setNotificationReadAt(\DateTime $date): void
+    {
+        $this->notificationReadAt = $date;
     }
 
     /**

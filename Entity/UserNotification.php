@@ -16,6 +16,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class UserNotification
 {
+    public const NUM_ITEMS = 12;
+
     use Deletable;
 
     /**
@@ -51,6 +53,14 @@ class UserNotification
      * @ORM\Column(type="integer", nullable=true)
      */
     private $elementId;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", nullable=true)
+     * @Assert\NotBlank()
+     */
+    private $extra;
 
     /**
      * @var \DateTime
@@ -139,6 +149,26 @@ class UserNotification
     public function setElementId(?int $elementId)
     {
         $this->elementId = $elementId;
+    }
+
+    /**
+     * Get extra
+     *
+     * @return string
+     */
+    public function getExtra(): ?string
+    {
+        return $this->extra;
+    }
+
+    /**
+     * Set extra
+     *
+     * @param string $extra
+     */
+    public function setExtra(?string $extra)
+    {
+        $this->extra = $extra;
     }
 
     /**

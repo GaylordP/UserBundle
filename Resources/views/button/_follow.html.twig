@@ -7,11 +7,11 @@
                 }
             ),
             'red',
-            'fas fa-user-plus',
+            include('@User/user/follow/_follow_ico.html.twig', with_context = false),
             false,
             {
-                'class': 'btn-sm user-follow-' ~ user.slug,
-                'data-front-common-ajax': 'true',
+                'class': 'btn-sm user-follow',
+                'data-user-slug': user.slug,
             }
         ) }}
     {% else %}
@@ -22,11 +22,11 @@
                 }
             ),
             'secondary',
-            'fas fa-user-times',
+            include('@User/user/follow/_unfollow_ico.html.twig', with_context = false),
             false,
             {
-                'class': 'btn-sm user-follow-' ~ user.slug,
-                'data-front-common-ajax': 'true',
+                'class': 'btn-sm user-follow',
+                'data-user-slug': user.slug,
             }
         ) }}
     {% endif %}
