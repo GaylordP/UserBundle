@@ -1,14 +1,22 @@
-let follows = document.querySelectorAll('.user-follow')
+import './component/_follow'
 
-follows.forEach(function(element) {
-    let _this = element
+(() => {
+    let send = XMLHttpRequest.prototype.send
+    XMLHttpRequest.prototype.send = function() {
+        this.addEventListener('load', function() {
+            try {
+                let json = JSON.parse(this.responseText)
 
-    element.onclick = (link) => {
-        link.preventDefault()
+                if (
+                    'undefined' !== json.status
+                        &&
+                    'login_required' === json.status
+                )
+                BootstrapModal(json.title, json.body)
+            } catch (e) {
+            }
+        })
 
-        let httpRequest = new XMLHttpRequest()
-        httpRequest.open('GET', _this.getAttribute('href'))
-        httpRequest.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
-        httpRequest.send()
+        return send.apply(this, arguments)
     }
-})
+})()

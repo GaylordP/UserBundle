@@ -1,9 +1,9 @@
 export const EventSourceListener = (eventSource) => {
-    eventSource.addEventListener('user_follow', function(e) {
+    eventSource.addEventListener('user_follow', (e) => {
         let data = JSON.parse(e.data)
         let elements = document.querySelectorAll('.user-follow[data-user-slug="' + data['user-slug'] + '"]')
 
-        elements.forEach(function(element) {
+        elements.forEach((element) => {
             if (true === data.isFollowed) {
                 element.classList.replace('btn-red', 'btn-secondary')
             } else {

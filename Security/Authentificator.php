@@ -148,7 +148,7 @@ class Authentificator extends AbstractFormLoginAuthenticator
     {
         if($request->isXmlHttpRequest()) {
             return new JsonResponse([
-                'action' => 'show-modal',
+                'status' => 'login_required',
                 'title' => $this->translator->trans('Error', [], 'validators'),
                 'body' => $this->translator->trans('login.required', [], 'user'),
             ], Response::HTTP_PARTIAL_CONTENT);

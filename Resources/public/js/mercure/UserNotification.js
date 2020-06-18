@@ -1,18 +1,18 @@
 import $ from 'jquery'
 
-$(document).ready(function () {
-    $('.dropdown ').on('show.bs.dropdown', function () {
+$(document).ready(() => {
+    $('.dropdown ').on('show.bs.dropdown', () => {
         $.ajax({
             url: '/user/notification-read',
             dataType: 'json',
-            complete: function(xhr) {
+            complete: (xhr) => {
             },
         })
     })
 })
 
 export const EventSourceListener = (eventSource) => {
-    eventSource.addEventListener('user_notification', function(e) {
+    eventSource.addEventListener('user_notification', (e) => {
         let data = JSON.parse(e.data)
 
         /*
@@ -30,20 +30,20 @@ export const EventSourceListener = (eventSource) => {
         }
     }, false)
 
-    eventSource.addEventListener('user_notification_delete', function(e) {
+    eventSource.addEventListener('user_notification_delete', (e) => {
         let data = JSON.parse(e.data)
         let elements = document.querySelectorAll('.user-notification[data-user-notification-id="' + data.id + '"]')
 
-        elements.forEach(function(element) {
+        elements.forEach((element) => {
             element.remove()
         })
     }, false)
 
-    eventSource.addEventListener('user_notification_unread_length', function(e) {
+    eventSource.addEventListener('user_notification_unread_length', (e) => {
         let data = JSON.parse(e.data)
         let badges = document.querySelectorAll('.badge-user-notification-unread')
 
-        badges.forEach(function(badge) {
+        badges.forEach((badge) => {
             badge.innerText = data.length
         })
     }, false)
