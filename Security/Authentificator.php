@@ -151,7 +151,7 @@ class Authentificator extends AbstractFormLoginAuthenticator
                 'status' => 'login_required',
                 'title' => $this->translator->trans('Error', [], 'validators'),
                 'body' => $this->translator->trans('login.required', [], 'user'),
-            ], Response::HTTP_PARTIAL_CONTENT);
+            ], Response::HTTP_FORBIDDEN);
         }
 
         return parent::start($request, $authException);
