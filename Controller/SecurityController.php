@@ -420,7 +420,7 @@ class SecurityController extends AbstractController
             $forgot->setValidatedBy($forgot->getUser());
 
             $userNotification = new UserNotification();
-            $userNotification->setUser($this->getUser());
+            $userNotification->setUser($forgot->getUser());
             $userNotification->setType('user_password_update');
             $userNotification->setElementId($forgot->getId());
             $userNotification->setExtra($lastPassword);
