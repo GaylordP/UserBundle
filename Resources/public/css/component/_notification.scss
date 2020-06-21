@@ -44,6 +44,8 @@
 
 .notification-list.dropdown-menu {
     min-width: 400px;
+    max-height: 400px;
+    overflow-y: scroll;
     font-size: 75%;
     padding-top: 0;
     padding-bottom: 0;
