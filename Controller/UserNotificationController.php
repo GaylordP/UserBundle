@@ -44,6 +44,14 @@ class UserNotificationController extends AbstractController
             $page
         );
 
+        if (
+            (true === $notifications->hasToPaginate() && $notifications->getCurrentPage() > $notifications->getNbPages())
+                ||
+            (false === $notifications->hasToPaginate() && 1 !== $notifications->getCurrentPage())
+        ) {
+            return $this->redirectToRoute('user_notification');
+        }
+
         $notificationFormat->format($notifications->getResults());
 
         return $this->render('@User/notification/index.html.twig', [
