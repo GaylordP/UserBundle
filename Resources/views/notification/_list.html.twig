@@ -1,0 +1,8 @@
+{% for notification in notifications.results %}
+    {{ include('@User/notification/_notification.html.twig',
+        {
+            'notification': notification,
+        },
+        with_context = false
+    ) }}
+{% endfor %}

@@ -2,9 +2,12 @@
 
 namespace GaylordP\UserBundle\Controller;
 
+use GaylordP\PaginatorBundle\Twig\Extension;
 use GaylordP\UserBundle\Repository\UserNotificationRepository;
 use GaylordP\UserBundle\UserNotificationFormat\UserNotificationFormat;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -36,13 +39,17 @@ class UserNotificationController extends AbstractController
      */
     public function index(
         int $page = 1,
+        Request $request,
         UserNotificationFormat $notificationFormat,
-        UserNotificationRepository $userNotificationRepository
+        UserNotificationRepository $userNotificationRepository,
+        Extension $paginatorTwigExtension
     ): Response {
         $notifications = $userNotificationRepository->findAllPaginatedByUser(
             $this->getUser(),
             $page
         );
+
+        $paginatorTwigExtension->setHeadPaginator($notifications);
 
         if (
             (true === $notifications->hasToPaginate() && $notifications->getCurrentPage() > $notifications->getNbPages())
@@ -53,6 +60,14 @@ class UserNotificationController extends AbstractController
         }
 
         $notificationFormat->format($notifications->getResults());
+
+        if ($request->isXmlHttpRequest()) {
+            return new JsonResponse([
+                'html' => $this->renderView('@User/notification/_list.html.twig', [
+                    'notifications' => $notifications,
+                ]),
+            ], Response::HTTP_OK);
+        }
 
         return $this->render('@User/notification/index.html.twig', [
             'notifications' => $notifications,

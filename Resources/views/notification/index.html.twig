@@ -7,15 +7,13 @@
 
 {% block content %}
     {% if notifications.results is not empty %}
-        <ul class="notification-list">
-            {% for notification in notifications.results %}
-                {{ include('@User/notification/_notification.html.twig',
-                    {
-                        'notification': notification,
-                    },
-                    with_context = false
-                ) }}
-            {% endfor %}
+        <ul class="notification-list paginator-content">
+            {{ include('@User/notification/_list.html.twig',
+                {
+                    'notifications': notifications,
+                },
+                with_context = false
+            ) }}
         </ul>
         {{ renderPaginator(notifications, 'user_notification_paginated',
             {},
