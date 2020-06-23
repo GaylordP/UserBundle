@@ -15,8 +15,10 @@ class UserNotificationRepository extends ServiceEntityRepository
         parent::__construct($registry, UserNotification::class);
     }
 
-    public function findAllPaginatedByUser(User $user, int $page = 1): Paginator
-    {
+    public function findAllPaginatedByUser(
+        User $user,
+        int $page = 1
+    ): Paginator {
         $qb = $this
             ->createQueryBuilder('notification')
             ->andWhere('notification.user = :user')
