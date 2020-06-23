@@ -42,9 +42,26 @@ export const EventSourceListener = (eventSource) => {
     eventSource.addEventListener('user_notification_unread_length', (e) => {
         let data = JSON.parse(e.data)
         let badges = document.querySelectorAll('.badge-user-notification-unread')
+        let length = data.length
+        let title = document.querySelector('title')
+        let lastLength = title.getAttribute('data-notification-unread-length')
+
+        if (0 === length) {
+            if ('0' !== lastLength) {
+                title.innerHTML = title.innerHTML.replace('(' + lastLength + ') ', '')
+            }
+        } else {
+            if ('0' === lastLength) {
+                title.innerHTML = '(' + length + ') ' + title.innerHTML
+            } else {
+                title.innerHTML = title.innerHTML.replace('(' + lastLength + ')', '(' + length + ')')
+            }
+        }
+
+        title.setAttribute('data-notification-unread-length', String(length))
 
         badges.forEach((badge) => {
-            badge.innerText = data.length
+            badge.innerText = length
         })
     }, false)
 }
