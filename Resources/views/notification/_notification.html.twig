@@ -3,6 +3,7 @@
         'class': 'border-' ~ notification.__color ~ ' user-notification' ~ (is_navbar is defined ? ' dropdown-item'),
         'data-user-notification-id': notification.id,
         'data-user-notification-read': notification is user_notification_read ? 'true': 'false',
+        'data-paginator-item-id': notification.id,
     } %}
     {% if is_navbar is defined and notification.__link is defined %}
         <a href="{{ notification.__link }}"{% for attrname, attrvalue in attr %}{% if attrvalue is not same as(false) %} {{ attrname }}="{{ attrvalue }}"{% endif %}{% endfor %}>
@@ -17,6 +18,7 @@
         <time class="badge badge-dark" datetime="{{ notification.createdAt|date('Y-m-d') }}T{{ notification.createdAt|date('H:i:s') }}.000Z">
             {{ notification.createdAt|format_time('short') }} :
         </time>
+        {{ notification.id }}
         {{ notification.__text|raw }}
     {% if is_navbar is defined and notification.__link is defined %}
         </a>
