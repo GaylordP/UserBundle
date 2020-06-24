@@ -3,24 +3,22 @@
         <h2 class="h6 mb-0">
             <i class="{{ include('@User/user/follow/_my_follower_ico.html.twig', with_context = false) }}"></i>
             {{ 'title.user.follow.my_followers'|trans({}, 'user') }}
-            <span class="badge badge-purple">
+            <span class="badge badge-primary" id="user-follow-follower-length">
                 {{ my_followers|length }}
             </span>
         </h2>
     </div>
-    <div class="card-body">
+    <div class="card-body" id="user-follow-follower" data-empty-message="{{ 'user.follow.nothing'|trans({}, 'user') }}">
         {% if my_followers is not empty %}
             <ul class="user-follow-list">
                 {% apply spaceless %}
                     {% for follower in my_followers %}
-                        <li>
-                            {{ include('@User/button/_user.html.twig',
-                                {
-                                    'user': follower.createdBy,
-                                },
-                                with_context = false
-                            ) }}
-                        </li>
+                        {{ include('@User/user/follow/_follower_item.html.twig',
+                            {
+                                'user': follower.createdBy,
+                            },
+                            with_context = false
+                        ) }}
                     {% endfor %}
                 {% endapply %}
             </ul>
@@ -38,37 +36,22 @@
         <h2 class="h6 mb-0">
             <i class="{{ include('@User/user/follow/_my_followed_ico.html.twig', with_context = false) }}"></i>
             {{ 'title.user.follow.my_followeds'|trans({}, 'user') }}
-            <span class="badge badge-purple">
+            <span class="badge badge-primary" id="user-follow-followed-length">
                 {{ my_followeds|length }}
             </span>
         </h2>
     </div>
-    <div class="card-body">
+    <div class="card-body" id="user-follow-followed" data-empty-message="{{ 'user.follow.nothing'|trans({}, 'user') }}">
         {% if my_followeds is not empty %}
             <ul class="user-follow-list">
                 {% apply spaceless %}
                     {% for followed in my_followeds %}
-                        <li>
-                            {{ include('@User/button/_user.html.twig',
-                                {
-                                    'user': followed.user,
-                                },
-                                with_context = false
-                            ) }}
-                            {{ null|button_link(
-                                path('user_follow',
-                                    {
-                                        'slug': followed.user.slug,
-                                    }
-                                ),
-                                '_delete_',
-                                null,
-                                true,
-                                {
-                                    'class': 'btn-sm',
-                                }
-                            ) }}
-                        </li>
+                        {{ include('@User/user/follow/_followed_item.html.twig',
+                            {
+                                'user': followed.user,
+                            },
+                            with_context = false
+                        ) }}
                     {% endfor %}
                 {% endapply %}
             </ul>

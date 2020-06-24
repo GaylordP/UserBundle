@@ -5,7 +5,7 @@
     ] %} active{% endif %}">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownUserNotification" data-user-mercure-url="https://bubble.lgbt/user/{{ app.user.slug }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="{{ include('@User/notification/_ico.html.twig', with_context = false) }}"></i>
-            <span class="badge badge-success badge-user-notification-unread">
+            <span class="badge badge-user-notification-unread badge-{% if 0  == count_user_notification_unread() %}secondary{% else %}danger{% endif %}">
                 {{ count_user_notification_unread() }}
             </span>
         </a>

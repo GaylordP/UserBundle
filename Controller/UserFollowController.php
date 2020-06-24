@@ -91,6 +91,28 @@ class UserFollowController extends AbstractController
 
             $entityManager->flush();
 
+            $update = new Update(
+                'https://bubble.lgbt/user/' . $member->getSlug(),
+                json_encode([
+                    'slug' => $this->getUser()->getSlug(),
+                ]),
+                true,
+                null,
+                'user_follow_page_follower_remove'
+            );
+            $publisher($update);
+
+            $update = new Update(
+                'https://bubble.lgbt/user/' . $this->getUser()->getSlug(),
+                json_encode([
+                    'slug' => $member->getSlug(),
+                ]),
+                true,
+                null,
+                'user_follow_page_followed_remove'
+            );
+            $publisher($update);
+
             if (!$request->isXmlHttpRequest()) {
                 $this->get('session')->getFlashBag()->add(
                     'success',
@@ -120,6 +142,32 @@ class UserFollowController extends AbstractController
             $entityManager->persist($userNotification);
             $entityManager->flush();
 
+            $update = new Update(
+                'https://bubble.lgbt/user/' . $member->getSlug(),
+                json_encode([
+                    'html' => $this->renderView('@User/user/follow/_follower_item.html.twig', [
+                        'user' => $this->getUser(),
+                    ]),
+                ]),
+                true,
+                null,
+                'user_follow_page_follower_add'
+            );
+            $publisher($update);
+
+            $update = new Update(
+                'https://bubble.lgbt/user/' . $this->getUser()->getSlug(),
+                json_encode([
+                    'html' => $this->renderView('@User/user/follow/_followed_item.html.twig', [
+                        'user' => $member,
+                    ]),
+                ]),
+                true,
+                null,
+                'user_follow_page_followed_add'
+            );
+            $publisher($update);
+
             if (!$request->isXmlHttpRequest()) {
                 $this->get('session')->getFlashBag()->add(
                     'success',
@@ -136,23 +184,23 @@ class UserFollowController extends AbstractController
             }
         }
 
+        $userProvider->addExtraInfos($member);
+
+        $update = new Update(
+            'https://bubble.lgbt/user/' . $this->getUser()->getSlug(),
+            json_encode([
+                'user-slug' => $member->getSlug(),
+                'isFollowed' => null !== $findFolow ? false : true,
+                'ico' => $this->renderView('@User/user/follow/_' . (null !== $findFolow ? 'follow' : 'unfollow') . '_ico.html.twig'),
+                'title' => null !== $findFolow ? $translator->trans('action.follow', [], 'user') : $translator->trans('action.unfollow', [], 'user'),
+            ]),
+            true,
+            null,
+            'user_follow'
+        );
+        $publisher($update);
+
         if ($request->isXmlHttpRequest()) {
-            $userProvider->addExtraInfos($member);
-
-            $update = new Update(
-                'https://bubble.lgbt/user/' . $this->getUser()->getSlug(),
-                json_encode([
-                    'user-slug' => $member->getSlug(),
-                    'isFollowed' => null !== $findFolow ? false : true,
-                    'ico' => $this->renderView('@User/user/follow/_' . (null !== $findFolow ? 'follow' : 'unfollow') . '_ico.html.twig'),
-                    'title' => null !== $findFolow ? $translator->trans('action.follow', [], 'user') : $translator->trans('action.unfollow', [], 'user'),
-                ]),
-                true,
-                null,
-                'user_follow'
-            );
-            $publisher($update);
-
             return new JsonResponse(null, Response::HTTP_OK);
         } else {
             if (

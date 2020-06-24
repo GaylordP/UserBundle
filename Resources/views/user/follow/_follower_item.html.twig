@@ -1,0 +1,8 @@
+<li data-user-slug="{{ user.slug }}">
+    {{ include('@User/button/_user.html.twig',
+        {
+            'user': user,
+        },
+        with_context = false
+    ) }}
+</li>

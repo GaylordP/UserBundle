@@ -61,6 +61,18 @@ export const EventSourceListener = (eventSource) => {
         title.setAttribute('data-notification-unread-length', String(length))
 
         badges.forEach((badge) => {
+            if (0 === length) {
+                if (badge.classList.contains('badge-red')) {
+                    badge.classList.remove('badge-red')
+                    badge.classList.add('badge-secondary')
+                }
+            } else {
+                if (badge.classList.contains('badge-secondary')) {
+                    badge.classList.remove('badge-secondary')
+                    badge.classList.add('badge-red')
+                }
+            }
+
             badge.innerText = length
         })
     }, false)
