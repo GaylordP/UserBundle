@@ -28,9 +28,9 @@ class UserProvider
         if ($user instanceof User) {
             $listEntitiesById[$user->getId()] = $user;
         } elseif (is_array($user) && current($user) instanceof User) {
-            array_map(function($e) use(&$listEntitiesById) {
+            foreach ($user as $e) {
                 $listEntitiesById[$e->getId()] = $e;
-            }, $user);
+            }
         }
 
         if (!empty($listEntitiesById)) {
@@ -38,19 +38,22 @@ class UserProvider
              * UserFollow
              */
             if (null !== $this->security->getUser()) {
-                $followedsIds = array_map(function($e) {
+                $followedsIds = [];
+                foreach ($listEntitiesById as $e) {
                     if (false === property_exists($e, self::IS_USER_FOLLOWED)) {
-                        return $e->getId();
+                        $followedsIds[] = $e->getId();
                     }
-                }, $listEntitiesById);
+                }
 
-                $followeds = $this->userFollowRepository->findBy([
-                    'createdBy' => $this->security->getUser(),
-                    'user' => $followedsIds,
-                ]);
+                if (!empty($followedsIds)) {
+                    $followeds = $this->userFollowRepository->findBy([
+                        'createdBy' => $this->security->getUser(),
+                        'user' => $followedsIds,
+                    ]);
 
-                foreach ($followeds as $followed) {
-                    $listEntitiesById[$followed->getUser()->getId()]->{self::IS_USER_FOLLOWED} = true;
+                    foreach ($followeds as $followed) {
+                        $listEntitiesById[$followed->getUser()->getId()]->{self::IS_USER_FOLLOWED} = true;
+                    }
                 }
             }
 
