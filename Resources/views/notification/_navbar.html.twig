@@ -2,7 +2,7 @@
     <li class="nav-item dropdown{% if app.request.get('_route') in [
         'user_notification',
         'user_notification_paginated',
-    ] %} active{% endif %}">
+    ] %} active{% endif %}" data-toggle="tooltip" title="{{ 'menu.user.notification'|trans({}, 'user') }}" id="navbarDropdownUserNotificationContainer">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownUserNotification" data-user-mercure-url="https://bubble.lgbt/user/{{ app.user.slug }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="{{ include('@User/notification/_ico.html.twig', with_context = false) }}"></i>
             <span class="badge badge-user-notification-unread badge-{% if 0  == count_user_notification_unread() %}secondary{% else %}danger{% endif %}">

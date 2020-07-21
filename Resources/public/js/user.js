@@ -1,4 +1,5 @@
 import './component/_follow'
+import './component/_notification'
 
 (() => {
     let send = XMLHttpRequest.prototype.send
