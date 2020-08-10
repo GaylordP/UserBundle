@@ -46,10 +46,14 @@ export const RefreshListLength = (container) => {
     badge.innerText = String(length)
 }
 
-export const EventSourceListener = (eventSource) => {
+export const EventSourceListener = (eventSource, dom) => {
+    if (undefined === dom) {
+        dom = document
+    }
+
     eventSource.addEventListener('user_follow', (e) => {
         let data = JSON.parse(e.data)
-        let elements = document.querySelectorAll('.user-follow[data-user-slug="' + data['user-slug'] + '"]')
+        let elements = dom.querySelectorAll('.user-follow[data-user-slug="' + data['user-slug'] + '"]')
 
         elements.forEach((element) => {
             if (true === data.isFollowed) {
@@ -64,7 +68,7 @@ export const EventSourceListener = (eventSource) => {
 
     eventSource.addEventListener('user_follow_page_follower_add', (e) => {
         let data = JSON.parse(e.data)
-        let userFollowFollowerContainer = document.querySelector('#user-follow-follower')
+        let userFollowFollowerContainer = dom.querySelector('#user-follow-follower')
 
         if (null !== userFollowFollowerContainer) {
             AddInList(userFollowFollowerContainer, data)
@@ -73,7 +77,7 @@ export const EventSourceListener = (eventSource) => {
 
     eventSource.addEventListener('user_follow_page_followed_add', (e) => {
         let data = JSON.parse(e.data)
-        let userFollowFollowedContainer = document.querySelector('#user-follow-followed')
+        let userFollowFollowedContainer = dom.querySelector('#user-follow-followed')
 
         if (null !== userFollowFollowedContainer) {
             AddInList(userFollowFollowedContainer, data)
@@ -82,7 +86,7 @@ export const EventSourceListener = (eventSource) => {
 
     eventSource.addEventListener('user_follow_page_follower_remove', (e) => {
         let data = JSON.parse(e.data)
-        let userFollowFollowerContainer = document.querySelector('#user-follow-follower')
+        let userFollowFollowerContainer = dom.querySelector('#user-follow-follower')
 
         if (null !== userFollowFollowerContainer) {
             RemoveInList(userFollowFollowerContainer, data.slug)
@@ -91,7 +95,7 @@ export const EventSourceListener = (eventSource) => {
 
     eventSource.addEventListener('user_follow_page_followed_remove', (e) => {
         let data = JSON.parse(e.data)
-        let userFollowFollowedContainer = document.querySelector('#user-follow-followed')
+        let userFollowFollowedContainer = dom.querySelector('#user-follow-followed')
 
         if (null !== userFollowFollowedContainer) {
             RemoveInList(userFollowFollowedContainer, data.slug)
