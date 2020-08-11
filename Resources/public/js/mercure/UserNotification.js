@@ -1,7 +1,7 @@
 import $ from 'jquery'
 
 $(document).ready(() => {
-    $('.dropdown ').on('show.bs.dropdown', () => {
+    $('#navbarDropdownUserNotificationContainer ').on('show.bs.dropdown', () => {
         $.ajax({
             url: '/user/notification-read',
             dataType: 'json',
