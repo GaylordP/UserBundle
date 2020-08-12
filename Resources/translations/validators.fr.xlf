@@ -14,6 +14,10 @@
                 <source>user.password.wrong</source>
                 <target>Le mot de passe indiqué est invalide.</target>
             </trans-unit>
+            <trans-unit id="username.already_taken">
+                <source>username.already_taken</source>
+                <target>Ce nom d'utilisateur est déjà pris.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

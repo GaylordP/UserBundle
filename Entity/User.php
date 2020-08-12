@@ -24,6 +24,11 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     message = "email.already_taken",
  *     repositoryMethod = "findUniqueEntityByEmail"
  * )
+ * @UniqueEntity(
+ *     "username",
+ *     message = "username.already_taken",
+ *     repositoryMethod = "findUniqueEntityByUsername"
+ * )
  */
 class User implements UserInterface, \Serializable
 {

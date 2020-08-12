@@ -26,6 +26,17 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         return $findOneBy;
     }
 
+    public function findUniqueEntityByUsername(array $data): ?User
+    {
+        $this->getEntityManager()->getFilters()->disable('deleted_at');
+
+        $findOneBy = $this->findOneByUsername($data['username']);
+
+        $this->getEntityManager()->getFilters()->enable('deleted_at');
+
+        return $findOneBy;
+    }
+
     public function upgradePassword(UserInterface $user, string $newEncodedPassword): void
     {
         if (!$user instanceof User) {
