@@ -33,6 +33,10 @@ class UserProvider
             }
         }
 
+        if (array_key_exists($this->security->getUser()->getId(), $listEntitiesById)) {
+            unset($listEntitiesById[$this->security->getUser()->getId()]);
+        }
+
         if (!empty($listEntitiesById)) {
             /*
              * UserFollow
