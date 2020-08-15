@@ -33,7 +33,11 @@ class UserProvider
             }
         }
 
-        if (array_key_exists($this->security->getUser()->getId(), $listEntitiesById)) {
+        if (
+            null !== $this->security->getUser()
+                &&
+            array_key_exists($this->security->getUser()->getId(), $listEntitiesById)
+        ) {
             unset($listEntitiesById[$this->security->getUser()->getId()]);
         }
 
