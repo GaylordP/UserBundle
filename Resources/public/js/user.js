@@ -18,7 +18,7 @@ import './component/_notification'
                       &&
                       'login_required' === json.status
                     )
-                        BootstrapModal(json.title, json.body)
+                        new BootstrapModal(json.title, json.body)
                 } catch (e) {
                 }
             }
